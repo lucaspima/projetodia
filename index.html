@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Projeto DIA | Discurso, Interação e Argumentação nas Mídias Digitais</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --azul: #2e3192;
+      --ciano: #1bffff;
+      --cinza: #f5f7fa;
+      --cinza2: #e0e0e0;
+      --rosa: #ff6e7f;
+      --preto: #232526;
+      --branco: #fff;
+      --header-pesquisador: #f5f7fa;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--branco);
+      color: var(--preto);
+      font-family: 'Montserrat', Arial, sans-serif;
+      min-height: 100vh;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(90deg, var(--azul) 60%, var(--ciano) 100%);
+      color: var(--branco);
+      box-shadow: 0 4px 24px #0002;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 0;
+    }
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2.5rem 3.5rem 1.5rem 3.5rem;
+    }
+    .logo-dia {
+      font-weight: 900;
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      color: var(--branco);
+      text-shadow: 0 2px 12px #0003;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo-dia::before {
+      content: "";
+      display: inline-block;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--ciano), var(--azul));
+      margin-right: 0.5rem;
+    }
+    nav {
+      display: flex;
+      gap: 2.2rem;
+    }
+    nav a {
+      color: var(--branco);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.15rem;
+      padding: 0.6rem 1.5rem;
+      border-radius: 8px;
+      transition: background 0.25s, color 0.25s;
+      letter-spacing: 0.5px;
+    }
+    nav a.active, nav a:hover {
+      background: var(--branco);
+      color: var(--azul);
+    }
+    .homepage-hero {
+      width: 100%;
+      background: linear-gradient(90deg, var(--azul) 60%, var(--ciano) 100%);
+      color: var(--branco);
+      padding: 4rem 0 3rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: 0 4px 24px #0002;
+    }
+    .homepage-hero h1 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      margin: 0 0 1.2rem 0;
+      letter-spacing: 1.5px;
+      text-shadow: 0 2px 12px #0003;
+    }
+    .homepage-hero p {
+      font-size: 1.25rem;
+      max-width: 700px;
+      margin: 0 auto 2.2rem auto;
+      color: var(--cinza2);
+      font-weight: 500;
+      line-height: 1.6;
+      text-align: center;
+      text-shadow: 0 1px 8px #0002;
+    }
+    .homepage-actions {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .homepage-action-btn {
+      background: var(--branco);
+      color: var(--azul);
+      font-weight: 700;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      padding: 1rem 2.2rem;
+      box-shadow: 0 2px 12px #0001;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+    .homepage-action-btn:hover {
+      background: var(--ciano);
+      color: var(--azul);
+      box-shadow: 0 4px 24px #0002;
+    }
+    .homepage-section {
+      max-width: 1100px;
+      margin: 3.5rem auto 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      flex-direction: row;
+      gap: 3rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .homepage-section-content {
+      flex: 2;
+      min-width: 260px;
+    }
+    .homepage-section h2 {
+      color: var(--azul);
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 1.1rem;
+      margin-top: 0;
+      letter-spacing: 0.5px;
+    }
+    .homepage-section p {
+      font-size: 1.08rem;
+      color: var(--preto);
+      line-height: 1.6;
+      margin-top: 0;
+      margin-bottom: 1.2rem;
+      text-align: justify;
+    }
+    .homepage-section-list {
+      flex: 1;
+      min-width: 220px;
+      background: var(--cinza);
+      border-radius: 14px;
+      box-shadow: 0 2px 12px #0001;
+      padding: 2rem 1.5rem;
+      margin-top: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+    /* Barra de publicações recentes */
+    .recent-pubs-bar {
+      width: 100%;
+      max-width: 900px;
+      margin: 3.5rem auto 0 auto;
+      background: var(--cinza);
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #0001;
+      padding: 1.5rem 2rem 1.2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1.2rem;
+    }
+    .recent-pubs-title {
+      color: var(--azul);
+      font-size: 1.22rem;
+      font-weight: 700;
+      margin-bottom: 0.7rem;
+      letter-spacing: 0.5px;
+    }
+    .recent-pubs-list {
+      display: flex;
+      flex-direction: row;
+      gap: 1.2rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+    .recent-pub-card {
+      min-width: 220px;
+      max-width: 260px;
+      background: var(--branco);
+      border-radius: 10px;
+      box-shadow: 0 1px 6px #0001;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1rem 1rem 1rem 1rem;
+      border: 1.5px solid var(--cinza2);
+      transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+      position: relative;
+      gap: 0.7rem;
+    }
+    .recent-pub-card:hover {
+      box-shadow: 0 4px 16px #0002;
+      border-color: var(--ciano);
+      transform: translateY(-2px) scale(1.02);
+    }
+    .recent-pub-cover {
+      width: 100%;
+      height: 120px;
+      background: var(--cinza2);
+      border-radius: 7px;
+      overflow: hidden;
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .recent-pub-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 7px;
+    }
+    .recent-pub-info {
+      font-size: 1.01rem;
+      color: var(--preto);
+      margin-bottom: 0.2rem;
+      line-height: 1.3;
+      font-weight: 500;
+    }
+    .recent-pub-link {
+      color: var(--azul);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.97rem;
+      margin-top: 0.2rem;
+      transition: color 0.2s;
+      align-self: flex-end;
+    }
+    .recent-pub-link:hover {
+      color: var(--ciano);
+      text-decoration: underline;
+    }
+    .homepage-carousel {
+      width: 100%;
+      max-width: 900px;
+      margin: 3.5rem auto 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      min-height: 260px;
+    }
+    .carousel-slides {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      border-radius: 18px;
+      box-shadow: 0 2px 16px #0001;
+      background: var(--cinza);
+      min-height: 220px;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+    .carousel-slide {
+      display: none;
+      width: 100%;
+      padding: 2.5rem 2.5rem 2rem 2.5rem;
+      box-sizing: border-box;
+      text-align: center;
+      flex-shrink: 0;
+      flex-grow: 1;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      min-height: 220px;
+    }
+    .carousel-slide.active {
+      display: flex;
+      animation: fadeIn 0.5s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .carousel-title {
+      color: var(--azul);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1.1rem;
+      margin-top: 0;
+      letter-spacing: 0.5px;
+    }
+    .carousel-text {
+      font-size: 1.08rem;
+      color: var(--preto);
+      line-height: 1.6;
+      margin: 0 auto;
+      max-width: 700px;
+      text-align: justify;
+    }
+    .carousel-controls {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1.2rem;
+    }
+    .carousel-btn {
+      background: var(--azul);
+      color: var(--branco);
+      border: none;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px #0001;
+    }
+    .carousel-btn:hover {
+      background: var(--ciano);
+      color: var(--azul);
+    }
+    .carousel-dots {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.7rem;
+      justify-content: center;
+    }
+    .carousel-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--cinza2);
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin: 0 2px;
+      padding: 0;
+    }
+    .carousel-dot.active {
+      background: var(--azul);
+    }
+    footer {
+      background: linear-gradient(90deg, var(--azul) 60%, var(--ciano) 100%);
+      color: var(--branco);
+      text-align: center;
+      padding: 3rem 1.5rem 2.5rem 1.5rem;
+      margin-top: auto;
+      border-top: none;
+      font-size: 1.08rem;
+      box-shadow: 0 -4px 24px #0002;
+    }
+    .footer-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .footer-logos img {
+      height: 44px;
+      background: none;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+      display: block;
+      filter: brightness(0) invert(1);
+    }
+    .footer-logos img[alt="Filologia"] {
+      height: 60px;
+    }
+    .footer-info {
+      font-size: 1.08rem;
+      margin-top: 1rem;
+      color: var(--cinza);
+      font-weight: 500;
+    }
+    @media (max-width: 900px) {
+      .header-container, .homepage-section {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      .homepage-section {
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .homepage-section-list {
+        margin-top: 0;
+      }
+    }
+    @media (max-width: 600px) {
+      .header-container, .homepage-section {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      .homepage-hero h1 {
+        font-size: 2rem;
+      }
+      .footer-logos img {
+        height: 28px;
+      }
+      .homepage-section-list {
+        padding: 1rem 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo-dia">Projeto DIA</div>
+      <nav>
+        <a href="#" class="active">Home</a>
+        <a href="lucas.html">Integrantes</a>
+        <a href="#">Disciplinas</a>
+        <a href="#">Eventos</a>
+        <a href="#">Defesas</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="homepage-hero">
+    <h1>Discurso, Interação e Argumentação nas Mídias Digitais</h1>
+    <p>
+      O Projeto DIA é um grupo de pesquisa dedicado ao estudo do discurso, da interação e da argumentação em ambientes digitais. Investigamos práticas discursivas, inovação lexical, argumentação e dinâmicas sociais em mídias digitais, com foco em fenômenos contemporâneos e suas implicações para a linguagem, a sociedade e a cultura.
+    </p>
+    <div class="homepage-actions">
+      <a class="homepage-action-btn" href="lucas.html">Conheça os integrantes</a>
+      <a class="homepage-action-btn" href="#">Linhas de pesquisa</a>
+      <a class="homepage-action-btn" href="#">Publicações</a>
+    </div>
+  </section>
+
+  <!-- Carousel Section -->
+  <section class="homepage-carousel">
+    <div class="carousel-slides">
+      <div class="carousel-slide active">
+        <div class="carousel-title">Inovação lexical em ambientes digitais</div>
+        <div class="carousel-text">
+          O Projeto DIA investiga como novas palavras e expressões surgem, circulam e se consolidam em fóruns, redes sociais e comunidades online, analisando os processos cognitivos e discursivos envolvidos na criatividade lexical digital.
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <div class="carousel-title">Argumentação e polêmica nas redes</div>
+        <div class="carousel-text">
+          Estudamos estratégias argumentativas, dinâmicas de polêmica e circulação de discursos em ambientes digitais, buscando compreender como opiniões, controvérsias e debates se desenvolvem e se transformam online.
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <div class="carousel-title">Identidade e práticas sociais digitais</div>
+        <div class="carousel-text">
+          Analisamos como identidades, grupos e comunidades se constroem e se manifestam nas mídias digitais, considerando práticas discursivas, engajamento e a formação de laços sociais mediados pela linguagem.
+        </div>
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="carousel-prev" aria-label="Anterior">&#8592;</button>
+      <button class="carousel-btn" id="carousel-next" aria-label="Próximo">&#8594;</button>
+    </div>
+    <div class="carousel-dots">
+      <button class="carousel-dot active" data-slide="0"></button>
+      <button class="carousel-dot" data-slide="1"></button>
+      <button class="carousel-dot" data-slide="2"></button>
+    </div>
+  </section>
+
+  <!-- About/Research Section -->
+  <section class="homepage-section">
+    <div class="homepage-section-content">
+      <h2>Apresentação</h2>
+      <p>
+        Este projeto congrega pesquisas dedicadas ao estudo de práticas discursivas em mídias digitais. Partindo de uma perspectiva multidisciplinar, que congrega a linguística sistêmico-funcional, a teoria da argumentação e os estudos críticos do discurso, busca-se compreender:
+      </p>
+      <ol style="margin:0 0 1.2rem 1.2rem; padding-left:1.2rem; color:var(--preto); font-size:1.08rem;">
+        <li>o papel da multimodalidade na constituição do discurso digital, tanto em redes sociais quanto em videogames;</li>
+        <li>o processo de produção, distribuição, consumo e interpretação de textos digitais em função das coerções sociossemióticas, contextuais e computacionais;</li>
+        <li>a formação e a constituição de controvérsias em ambiente digital, com ênfase na depreensão de argumentários;</li>
+        <li>o funcionamento de polílogos argumentativos em plataformas digitais, com destaque ao Facebook, ao Twitter, ao Instagram, ao Reddit, ao YouTube e ao 4chan.</li>
+      </ol>
+      <p style="margin-top:1.2rem;">
+        Informações cadastrais do projeto no Sucupira constam <a href="#" style="color:var(--azul);text-decoration:underline;">aqui</a>.
+      </p>
+    </div>
+    <div class="homepage-section-list">
+      <h3>Temas de Pesquisa</h3>
+      <ul>
+        <li>Inovação lexical e neologismos digitais</li>
+        <li>Argumentação e polêmica em redes sociais</li>
+        <li>Dinâmicas discursivas em fóruns e comunidades online</li>
+        <li>Circulação de discursos e viralização</li>
+        <li>Identidades e práticas sociais em ambientes digitais</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Barra de publicações recentes -->
+  <section class="recent-pubs-bar">
+    <div class="recent-pubs-title">Publicações recentes em destaque</div>
+    <div class="recent-pubs-list" id="recent-pubs-list">
+      <div class="recent-pub-card">
+        <!-- <div class="recent-pub-cover">
+          <img src="imgs/anões.png" alt="Capa da publicação">
+        </div> -->
+        <div class="recent-pub-info">
+          <b>Anões, chads e nazipardos</b><br>
+          Texto Livre - 2023
+        </div>
+        <a class="recent-pub-link" href="https://www.researchgate.net/publication/375185427_Anoes_chads_e_nazipardos_as_estrategias_de_nomeacao_e_predicacao_no_discurso_da_direita-alternativa_no_Brasil" target="_blank">Paper</a>
+      </div>
+      <div class="recent-pub-card">
+        <!-- <div class="recent-pub-cover">
+          <img src="imgs/conversation.jpg" alt="Capa da publicação">
+        </div> -->
+        <div class="recent-pub-info">
+          <b>Quem são os anões da alt-right?</b><br>
+          The Conversation Brasil - 2024
+        </div>
+        <a class="recent-pub-link" href="#" target="_blank">Link</a>
+      </div>
+      <div class="recent-pub-card">
+        <!-- <div class="recent-pub-cover">
+          <img src="imgs/vermelho.png" alt="Capa da publicação">
+        </div> -->
+        <div class="recent-pub-info">
+          <b>Linguistas estudam a “direita alternativa” e como sua cultura se espalha pelo Brasil</b><br>
+          Portal Vermelho - 2024
+        </div>
+        <a class="recent-pub-link" href="#" target="_blank">Link</a>
+      </div>
+      <div class="recent-pub-card">
+        <!-- <div class="recent-pub-cover">
+          <img src="imgs/interesse.jpg" alt="Capa da publicação">
+        </div> -->
+        <div class="recent-pub-info">
+          <b>Quem são os anões da alt-right?</b> (Reprodução)<br>
+          Interesse Nacional - 2024
+        </div>
+        <a class="recent-pub-link" href="#" target="_blank">Link</a>
+      </div>
+      <div class="recent-pub-card">
+        <!-- <div class="recent-pub-cover">
+          <img src="imgs/scielo.png" alt="Capa da publicação">
+        </div> -->
+        <div class="recent-pub-info">
+          <b>Jogos de linguagem no discurso online da direita alternativa no Brasil</b><br>
+          Scielo - 2024
+        </div>
+        <a class="recent-pub-link" href="#" target="_blank">Link</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logos">
+      <img src="imgs/usp.png" alt="USP">
+      <img src="imgs/fflch.png" alt="FFLCH">
+      <img src="imgs/flp.png" alt="Filologia">
+    </div>
+    <div class="footer-info">
+      Projeto DIA – USP | Filologia e Língua Portuguesa – DLCV | FFLCH | © 2025<br>
+    </div>
+  </footer>
+  <script>
+    // Carousel logic
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+    let currentSlide = 0;
+
+    function showSlide(idx) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === idx);
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === idx);
+      });
+      currentSlide = idx;
+    }
+
+    document.getElementById('carousel-prev').onclick = function() {
+      showSlide((currentSlide - 1 + slides.length) % slides.length);
+    };
+    document.getElementById('carousel-next').onclick = function() {
+      showSlide((currentSlide + 1) % slides.length);
+    };
+    dots.forEach((dot, i) => {
+      dot.onclick = () => showSlide(i);
+    });
+
+    // Optional: auto-advance
+    // setInterval(() => showSlide((currentSlide + 1) % slides.length), 9000);
+  </script>
+</body>
+</html>
