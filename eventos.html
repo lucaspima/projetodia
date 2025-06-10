@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Eventos | Projeto DIA</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --azul: #2e3192;
+      --ciano: #1bffff;
+      --cinza: #f5f7fa;
+      --cinza2: #e0e0e0;
+      --rosa: #ff6e7f;
+      --preto: #232526;
+      --branco: #fff;
+      --header-pesquisador: #f5f7fa;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f5fcff 60%, #eaf6ff 90%, #f5f7fa 100%);
+      color: var(--preto);
+      font-family: 'Montserrat', Arial, sans-serif;
+      min-height: 100vh;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(90deg, var(--azul) 60%, var(--ciano) 100%);
+      color: var(--branco);
+      box-shadow: 0 4px 24px #0002;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 0;
+    }
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2.5rem 3.5rem 1.5rem 3.5rem;
+    }
+    .logo-dia {
+      font-weight: 900;
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      color: var(--branco);
+      text-shadow: 0 2px 12px #0003;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo-dia::before {
+      content: "";
+      display: inline-block;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--ciano), var(--azul));
+      margin-right: 0.5rem;
+    }
+    nav {
+      display: flex;
+      gap: 2.2rem;
+    }
+    nav a {
+      color: var(--branco);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.15rem;
+      padding: 0.6rem 1.5rem;
+      border-radius: 8px;
+      transition: background 0.25s, color 0.25s;
+      letter-spacing: 0.5px;
+    }
+    nav a.active, nav a:hover {
+      background: var(--branco);
+      color: var(--azul);
+    }
+    main {
+      max-width: 1100px;
+      margin: 2.5rem auto 2rem auto;
+      padding: 0 1rem;
+      width: 100%;
+      flex: 1;
+    }
+    .eventos-section {
+      margin-bottom: 2.5rem;
+    }
+    .eventos-title {
+      color: var(--azul);
+      font-size: 1.7rem;
+      font-weight: 800;
+      margin-bottom: 1.2rem;
+      margin-top: 0;
+      letter-spacing: 0.5px;
+      padding-top: 0.4em;
+      padding-bottom: 0.3em;
+      text-align: left;
+    }
+    .eventos-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.3rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .evento-card {
+      background: var(--cinza);
+      border-radius: 12px;
+      box-shadow: 0 2px 12px #0001;
+      padding: 1.2rem 1.3rem 1rem 1.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      border-left: 6px solid var(--azul);
+      position: relative;
+    }
+    .evento-card-futuro {
+      border-left-color: var(--ciano);
+      background: #eafdff;
+    }
+    .evento-data {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--azul);
+      margin-bottom: 0.2rem;
+    }
+    .evento-titulo {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--preto);
+      margin-bottom: 0.1rem;
+    }
+    .evento-descricao {
+      font-size: 1.04rem;
+      color: #444;
+      margin-bottom: 0.1rem;
+    }
+    .evento-link {
+      font-size: 0.97rem;
+      color: var(--azul);
+      text-decoration: underline;
+      font-weight: 600;
+      margin-top: 0.2rem;
+      align-self: flex-start;
+      transition: color 0.2s;
+    }
+    .evento-link:hover {
+      color: var(--ciano);
+    }
+    .eventos-banner {
+      width: 100%;
+      max-width: 1100px;
+      margin: 2.5rem auto 2.2rem auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 18px;
+      overflow: hidden;
+      min-height: 180px;
+      background: #e0f7fa;
+      box-shadow: 0 2px 16px #0001;
+    }
+    .eventos-banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      min-height: 180px;
+      max-height: 320px;
+      background: #e0f7fa;
+    }
+    @media (max-width: 900px) {
+      .header-container, main {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .header-container, main {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      .logo-dia {
+        font-size: 1.3rem;
+      }
+      .eventos-title {
+        font-size: 1.25rem;
+      }
+      .evento-titulo {
+        font-size: 1.05rem;
+      }
+    }
+    footer {
+      background: linear-gradient(90deg, var(--azul) 60%, var(--ciano) 100%);
+      color: var(--branco);
+      text-align: center;
+      padding: 3rem 1.5rem 2.5rem 1.5rem;
+      margin-top: auto;
+      border-top: none;
+      font-size: 1.08rem;
+      box-shadow: 0 -4px 24px #0002;
+    }
+    .footer-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .footer-logos img {
+      height: 44px;
+      background: none;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+      display: block;
+      filter: brightness(0) invert(1);
+    }
+    .footer-logos img[alt="Filologia"] {
+      height: 60px;
+    }
+    .footer-info {
+      font-size: 1.08rem;
+      margin-top: 1rem;
+      color: var(--cinza);
+      font-weight: 500;
+    }
+    /* Banner individual para cada evento */
+    .evento-banner {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto 1.2rem auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 14px;
+      overflow: hidden;
+      min-height: 120px;
+      background: #e0f7fa;
+      box-shadow: 0 2px 12px #0001;
+      cursor: pointer;
+      transition: box-shadow 0.18s, filter 0.18s;
+      border: none;
+      padding: 0;
+    }
+    .evento-banner:hover,
+    .evento-banner:focus {
+      box-shadow: 0 4px 24px #00eaff44;
+      filter: brightness(1.04) saturate(1.08);
+    }
+    .evento-banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      min-height: 120px;
+      max-height: 320px;
+      background: #e0f7fa;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo-dia">Projeto DIA</div>
+      <nav>
+        <a href="#">Home</a>
+        <a href="lucas.html">Integrantes</a>
+        <a href="#">Disciplinas</a>
+        <a href="eventos.html" class="active">Eventos</a>
+        <a href="#">Defesas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Eventos Futuros -->
+    <section class="eventos-section">
+      <div class="eventos-title">Próximos eventos</div>
+      <ul class="eventos-list">
+        <li class="evento-card evento-card-futuro">
+          <a href="eped2025.html" class="evento-banner" title="Ver detalhes do XV EPED-USP">
+            <img src="imgs/eventos/eped2025.png" alt="Banner EPED XV" />
+          </a>
+          <div class="evento-data">21 e 22/08/2025</div>
+          <div class="evento-titulo">XV EPED-USP – Discurso e Educação</div>
+          <div class="evento-descricao">
+            <b>O Encontro de Pós-Graduandos em Estudos Discursivos da USP (EPED-USP)</b> é um evento acadêmico organizado por pós-graduandos/as do Programa de Pós-Graduação em Filologia e Língua Portuguesa da Universidade de São Paulo (FLP-USP). Seu objetivo é promover o diálogo entre distintas abordagens teóricas e metodológicas de estudos do texto e do discurso, integrando alunos/as de diversos programas de pós-graduação da USP e de outras instituições.<br><br>
+            Com edições desde 2009, o evento incentiva o debate de diferentes olhares epistemológicos e variados objetos de análise que caracterizam o estudo da produção contextualizada de sentido. O EPED acolhe docentes e alunos/as da USP, além de pesquisadores/as convidados/as do Brasil e do exterior para mesas e conferências. O sucesso do EPED tem inspirado outros eventos organizados por pós-graduandos/as na área de Linguística e Literatura.<br><br>
+            <b>Em 2025, o EPED chega à sua décima quinta edição com o tema "Discurso e Educação".</b> O objetivo é promover, por meio de mesas-redondas e conferências, reflexões sobre o potencial dos estudos discursivos, em diálogo com áreas afins, para compreender como a educação e o ensino são representados e valorados socialmente.<br><br>
+            A discussão sobre educação é permeada por discursos de diferentes setores: comunidade escolar, instituições de pesquisa, políticas públicas e sociedade em geral. Esses discursos revelam tensões de poder, disputas por legitimidade, múltiplos interesses e a pluralidade de vozes, criando um ambiente potencialmente mais democrático e inclusivo. Os debates reforçam a relevância da educação e a necessidade constante de diálogo.<br><br>
+            Os estudos do discurso, com sua pluralidade teórica e metodológica, podem contribuir para o aprofundamento das discussões em uma área fundamental para a democratização do saber e a redução das desigualdades. O XV EPED busca fomentar debates sobre as tensões e potencialidades dos discursos plurais que permeiam a educação, guiado pela pergunta: <i>Como os discursos plurais, com suas múltiplas vozes e perspectivas, podem contribuir para uma educação mais democrática e inclusiva?</i><br><br>
+            <b>O XV EPED será realizado nos dias 21 e 22 de agosto de 2025</b> e convida pesquisadores/as da USP e de outras instituições a debater pesquisas sobre questões discursivas, textuais, semântico-pragmáticas, interacionais e de ensino de língua portuguesa e estrangeira.<br><br>
+            <small>
+              O tema norteador se aplica apenas às conferências e mesas-redondas. As propostas submetidas podem abordar qualquer temática relacionada aos estudos textuais, discursivos, semântico-pragmáticos, interacionais e ao ensino de língua portuguesa e estrangeira.
+            </small>
+          </div>
+        </li>
+        <!-- Adicione mais eventos futuros aqui, cada um com seu banner -->
+      </ul>
+    </section>
+
+    <!-- Eventos Passados -->
+    <section class="eventos-section">
+      <div class="eventos-title">Eventos anteriores</div>
+      <ul class="eventos-list">
+        <li class="evento-card">
+          <a href="eped2024.html" class="evento-banner" title="Ver detalhes do evento Inovação lexical em fóruns digitais">
+            <img src="imgs/eventos/eped2024.png" alt="Banner Inovação lexical em fóruns digitais" />
+          </a>
+          <div class="evento-data">2024</div>
+          <div class="evento-titulo">XIV EPED</div>
+          <div class="evento-descricao">
+            Discurso e desordem informacional.
+          </div>
+        </li>
+        <li class="evento-card">
+          <a href="workshop-ferramentas.html" class="evento-banner" title="Ver detalhes do Workshop Ferramentas digitais para análise de discurso">
+            <img src="imgs/eventos/eped2023.png" alt="Banner Workshop Ferramentas digitais para análise de discurso" />
+          </a>
+          <div class="evento-data">2023</div>
+          <div class="evento-titulo">XIII EPED</div>
+          <div class="evento-descricao">
+            Discurso e movimentos sociais.
+          </div>
+        </li>
+        <!-- Adicione mais eventos passados aqui, cada um com seu banner -->
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-logos">
+      <img src="imgs/usp.png" alt="USP">
+      <img src="imgs/fflch.png" alt="FFLCH">
+      <img src="imgs/flp.png" alt="Filologia">
+    </div>
+    <div class="footer-info">
+      Projeto DIA – USP | Filologia e Língua Portuguesa – DLCV | FFLCH | © 2025<br>
+    </div>
+  </footer>
+</body>
+</html>

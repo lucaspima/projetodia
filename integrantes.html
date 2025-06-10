@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Integrantes | Projeto DIA</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --azul: #2e3192;
+      --ciano: #1bffff;
+      --cinza: #f5f7fa;
+      --cinza2: #e0e0e0;
+      --preto: #232526;
+      --branco: #fff;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      /* Fundo muito sutil: gradiente claro ciano-azul */
+      background: linear-gradient(135deg, #f5f7ff 60%, #eaf6ff 90%, #f5f7fa 100%);
+      color: var(--preto);
+      font-family: 'Montserrat', Arial, sans-serif;
+      min-height: 100vh;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(90deg, var(--azul) 60%, var(--ciano) 100%);
+      color: var(--branco);
+      box-shadow: 0 4px 24px #0002;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 0;
+    }
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2.5rem 3.5rem 1.5rem 3.5rem;
+    }
+    .logo-dia {
+      font-weight: 900;
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      color: var(--branco);
+      text-shadow: 0 2px 12px #0003;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo-dia::before {
+      content: "";
+      display: inline-block;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--ciano), var(--azul));
+      margin-right: 0.5rem;
+    }
+    nav {
+      display: flex;
+      gap: 2.2rem;
+    }
+    nav a {
+      color: var(--branco);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.15rem;
+      padding: 0.6rem 1.5rem;
+      border-radius: 8px;
+      transition: background 0.25s, color 0.25s;
+      letter-spacing: 0.5px;
+    }
+    nav a.active, nav a:hover {
+      background: var(--branco);
+      color: var(--azul);
+    }
+    main {
+      max-width: 1100px;
+      margin: 2rem auto 1.2rem auto; /* menos espaço acima/abaixo */
+      padding: 0 0.5rem; /* menos padding lateral */
+      flex: 1;
+      width: 100%;
+    }
+    .integrantes-section {
+      margin-bottom: 1.2rem; /* menos espaço entre seções */
+    }
+    .integrantes-title {
+      color: var(--azul);
+      font-size: 1.7rem; /* aumentado */
+      font-weight: 800;
+      margin-bottom: 1.2rem; /* mais espaço abaixo */
+      margin-top: 2.2rem;    /* mais espaço acima */
+      letter-spacing: 0.5px;
+      padding-top: 0.4em;    /* novo: padding superior */
+      padding-bottom: 0.3em; /* novo: padding inferior */
+    }
+    .integrantes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); /* cartões um pouco menores */
+      gap: 1.2rem; /* menos espaço entre cartões */
+    }
+    .integrante-card {
+      background: var(--cinza);
+      border-radius: 14px;
+      box-shadow: 0 2px 12px #0001;
+      padding: 1.2rem 1rem 0.7rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      min-height: 200px; /* reduz altura mínima */
+    }
+    /* Adicione esta classe para padronizar o tamanho das caixas dos integrantes (exceto líder) */
+    .integrante-card--padrao {
+      height: 240px;
+      min-height: unset;
+      max-height: 240px;
+      padding: 1.1rem 0.8rem 0.5rem 0.8rem;
+    }
+    @media (max-width: 600px) {
+      /* Ajuste responsivo para caixas padronizadas */
+      .integrante-card--padrao {
+        height: 270px;
+        max-height: 270px;
+      }
+      .header-container, main {
+        padding-left: 0.2rem;
+        padding-right: 0.2rem;
+      }
+      .logo-dia {
+        font-size: 1.1rem;
+      }
+      .integrante-foto {
+        width: 60px;
+        height: 60px;
+      }
+      .lider-foto {
+        width: 130px;
+        height: 1300px;
+        margin-bottom: 0.7rem;
+      }
+      .integrante-card {
+        padding: 0.7rem 0.5rem 0.4rem 0.5rem;
+      }
+      .integrante-card--padrao {
+        padding: 0.6rem 0.4rem 0.3rem 0.4rem;
+      }
+      .integrantes-title {
+        font-size: 1.25rem; /* aumentado para mobile */
+        margin-top: 1.3rem;
+        margin-bottom: 0.8rem;
+        padding-top: 0.25em;
+        padding-bottom: 0.18em;
+      }
+      .integrante-nome {
+        font-size: 1rem;
+      }
+      .integrante-afiliacao {
+        font-size: 0.92rem;
+      }
+    }
+    .integrante-foto {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      background: var(--cinza2);
+      border: 2px solid var(--azul);
+      transition: box-shadow 0.2s;
+    }
+    .lider-foto {
+      width: 180px;
+      height: 180px;
+      margin-bottom: 1rem;
+    }
+    .lider-foto--grande {
+      width: 380px;
+      height: 380px;
+      box-shadow: 0 0 0 8px var(--ciano), 0 6px 40px #0003;
+      border: 5px solid var(--azul);
+      background: var(--branco);
+      transition: box-shadow 0.2s, border 0.2s, transform 0.18s;
+    }
+    a > .integrante-foto,
+    a > .lider-foto {
+      transition: transform 0.18s, box-shadow 0.18s, filter 0.18s;
+      cursor: pointer;
+    }
+    a:hover > .integrante-foto,
+    a:focus > .integrante-foto,
+    a:hover > .lider-foto,
+    a:focus > .lider-foto {
+      transform: scale(1.06) translateY(-2px);
+      box-shadow: 0 0 0 4px var(--ciano), 0 6px 32px #0003;
+      filter: brightness(1.08) saturate(1.15);
+    }
+    @media (max-width: 600px) {
+      /* ...existing code... */
+      .integrante-foto,
+      .lider-foto {
+        width: 130px;
+        height: 130px;
+        margin-bottom: 0.7rem;
+      }
+      .lider-foto--grande {
+        width: 240px;
+        height: 240px;
+        box-shadow: 0 0 0 4px var(--ciano), 0 3px 20px #0002;
+        border-width: 3px;
+      }
+      /* ...existing code... */
+    }
+    .integrantes-section .integrantes-grid .integrante-card:first-child .integrante-foto {
+      width: 120px;
+      height: 120px;
+    }
+    .integrante-nome {
+      font-weight: 700;
+      font-size: 1.13rem;
+      margin-bottom: 0.3rem;
+      color: var(--preto);
+    }
+    .integrante-afiliacao {
+      font-size: 1rem;
+      color: #444;
+      margin-bottom: 0.5rem;
+    }
+    .integrante-links {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 0.3rem;
+    }
+    .integrante-link-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      border-radius: 6px;
+      padding: 0.08rem 0.18rem;
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: var(--azul);
+      text-decoration: none;
+      transition: background 0.18s, filter 0.18s;
+      gap: 0.3em;
+      min-width: 28px;
+      min-height: 24px;
+    }
+    .integrante-link-btn img {
+      width: 18px;
+      height: 18px;
+      display: inline-block;
+      vertical-align: middle;
+      filter: grayscale(0.2) brightness(0.9);
+      transition: filter 0.18s;
+    }
+    .integrante-link-btn:hover,
+    .integrante-link-btn:focus {
+      background: #e0f7fa;
+    }
+    .integrante-link-btn:hover img,
+    .integrante-link-btn:focus img {
+      filter: grayscale(0) brightness(1.1) drop-shadow(0 0 2px var(--ciano));
+    }
+    @media (max-width: 900px) {
+      .header-container, main {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .header-container, main {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      .logo-dia {
+        font-size: 1.3rem;
+      }
+      .integrante-foto {
+        width: 60px;
+        height: 60px;
+      }
+    }
+    footer {
+      background: linear-gradient(90deg, var(--azul) 60%, var(--ciano) 100%);
+      color: var(--branco);
+      text-align: center;
+      padding: 3rem 1.5rem 2.5rem 1.5rem;
+      margin-top: auto;
+      border-top: none;
+      font-size: 1.08rem;
+      box-shadow: 0 -4px 24px #0002;
+    }
+    .footer-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .footer-logos img {
+      height: 44px;
+      background: none;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+      display: block;
+      filter: brightness(0) invert(1);
+    }
+    .footer-logos img[alt="Filologia"] {
+      height: 60px;
+    }
+    .footer-info {
+      font-size: 1.08rem;
+      margin-top: 1rem;
+      color: var(--cinza);
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo-dia">Projeto DIA</div>
+      <nav>
+        <a href="integrantes.html" class="active">Integrantes</a>
+        <a href="#">Home</a>
+        <a href="#">Disciplinas</a>
+        <a href="#">Eventos</a>
+        <a href="#">Defesas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Líder -->
+    <section class="integrantes-section">
+      <div class="integrantes-title">Líder</div>
+      <div class="integrantes-grid">
+        <div class="integrante-card">
+          <a href="#" target="_blank" title="Página pessoal de Paulo Roberto Gonçalves-Segundo">
+            <img class="integrante-foto lider-foto lider-foto--grande" src="imgs/pessoas/paulo.jpg" alt="Foto de Paulo Roberto Gonçalves-Segundo">
+          </a>
+          <div class="integrante-nome">Prof. Dr. Paulo Roberto Gonçalves-Segundo</div>
+          <div class="integrante-afiliacao">Universidade de São Paulo</div>
+          <div class="integrante-links">
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearchGate">
+              <img src="imgs/researchgate.png" alt="ResearchGate">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="Lattes">
+              <img src="imgs/lattes.png" alt="Lattes">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearcherID">
+              <img src="imgs/researcherid.png" alt="ResearcherID">
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Doutores -->
+    <section class="integrantes-section">
+      <div class="integrantes-title">Doutores</div>
+      <div class="integrantes-grid">
+        <div class="integrante-card integrante-card--padrao">
+          <a href="#" target="_blank" title="Página pessoal de Vanessa Anachoreta">
+            <img class="integrante-foto" src="imgs/pessoas/vanessa.jpg" alt="Foto de Vanessa Anachoreta">
+          </a>
+          <div class="integrante-nome">Vanessa Anachoreta</div>
+          <div class="integrante-afiliacao">Universidade do Porto</div>
+          <div class="integrante-links">
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearchGate">
+              <img src="imgs/researchgate.png" alt="ResearchGate">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="Lattes">
+              <img src="imgs/lattes.png" alt="Lattes">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearcherID">
+              <img src="imgs/researcherid.png" alt="ResearcherID">
+            </a>
+          </div>
+        </div>
+        <div class="integrante-card integrante-card--padrao">
+          <a href="#" target="_blank" title="Página pessoal de Gabriel Isola-Lanzoni">
+            <img class="integrante-foto" src="imgs/pessoas/gabriel.jpg" alt="Foto de Gabriel Isola-Lanzoni">
+          </a>
+          <div class="integrante-nome">Gabriel Isola-Lanzoni</div>
+          <div class="integrante-afiliacao">Universidade de São Paulo</div>
+          <div class="integrante-links">
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearchGate">
+              <img src="imgs/researchgate.png" alt="ResearchGate">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="Lattes">
+              <img src="imgs/lattes.png" alt="Lattes">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearcherID">
+              <img src="imgs/researcherid.png" alt="ResearcherID">
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Doutorado -->
+    <section class="integrantes-section">
+      <div class="integrantes-title">Doutorado</div>
+      <div class="integrantes-grid">
+        <div class="integrante-card integrante-card--padrao">
+          <a href="#" target="_blank" title="Página pessoal de Sandra Gomes Rasquel">
+            <img class="integrante-foto" src="imgs/pessoas/sandra.jpg" alt="Foto de Sandra Gomes Rasquel">
+          </a>
+          <div class="integrante-nome">Sandra Gomes Rasquel</div>
+          <div class="integrante-afiliacao">Universidade de São Paulo</div>
+          <div class="integrante-links">
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearchGate">
+              <img src="imgs/researchgate.png" alt="ResearchGate">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="Lattes">
+              <img src="imgs/lattes.png" alt="Lattes">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearcherID">
+              <img src="imgs/researcherid.png" alt="ResearcherID">
+            </a>
+          </div>
+        </div>
+        <div class="integrante-card integrante-card--padrao">
+          <a href="#" target="_blank" title="Página pessoal de Lucas Pereira da Silva">
+            <img class="integrante-foto" src="imgs/pessoas/lucasps.jpg" alt="Foto de Lucas Pereira da Silva">
+          </a>
+          <div class="integrante-nome">Lucas Pereira da Silva</div>
+          <div class="integrante-afiliacao">Universidade de São Paulo</div>
+          <div class="integrante-links">
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearchGate">
+              <img src="imgs/researchgate.png" alt="ResearchGate">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="Lattes">
+              <img src="imgs/lattes.png" alt="Lattes">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearcherID">
+              <img src="imgs/researcherid.png" alt="ResearcherID">
+            </a>
+          </div>
+        </div>
+        <div class="integrante-card integrante-card--padrao">
+          <a href="#" target="_blank" title="Página pessoal de Winola Weiss">
+            <img class="integrante-foto" src="imgs/pessoas/winola.jpg" alt="Foto de Winola Weiss">
+          </a>
+          <div class="integrante-nome">Winola Weiss</div>
+          <div class="integrante-afiliacao">Universidade de São Paulo</div>
+          <div class="integrante-links">
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearchGate">
+              <img src="imgs/researchgate.png" alt="ResearchGate">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="Lattes">
+              <img src="imgs/lattes.png" alt="Lattes">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearcherID">
+              <img src="imgs/researcherid.png" alt="ResearcherID">
+            </a>
+          </div>
+        </div>
+        <div class="integrante-card integrante-card--padrao">
+          <a href="#" target="_blank" title="Página pessoal de Theodoro C. Farhat">
+            <img class="integrante-foto" src="imgs/pessoas/theodoro.jpg" alt="Foto de Theodoro C. Farhat">
+          </a>
+          <div class="integrante-nome">Theodoro C. Farhat</div>
+          <div class="integrante-afiliacao">Universidade de São Paulo</div>
+          <div class="integrante-links">
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearchGate">
+              <img src="imgs/researchgate.png" alt="ResearchGate">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="Lattes">
+              <img src="imgs/lattes.png" alt="Lattes">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearcherID">
+              <img src="imgs/researcherid.png" alt="ResearcherID">
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mestrado -->
+    <section class="integrantes-section">
+      <div class="integrantes-title">Mestrado</div>
+      <div class="integrantes-grid">
+        <div class="integrante-card integrante-card--padrao">
+          <a href="#" target="_blank" title="Página pessoal de André Matumoto">
+            <img class="integrante-foto" src="imgs/pessoas/andre.jpg" alt="Foto de André Matumoto">
+          </a>
+          <div class="integrante-nome">André Matumoto</div>
+          <div class="integrante-afiliacao">Universidade de São Paulo</div>
+          <div class="integrante-links">
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearchGate">
+              <img src="imgs/researchgate.png" alt="ResearchGate">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="Lattes">
+              <img src="imgs/lattes.png" alt="Lattes">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearcherID">
+              <img src="imgs/researcherid.png" alt="ResearcherID">
+            </a>
+          </div>
+        </div>
+        <div class="integrante-card integrante-card--padrao">
+          <a href="#" target="_blank" title="Página pessoal de Daiana da Silva Teixeira">
+            <img class="integrante-foto" src="imgs/pessoas/daiana.jpg" alt="Foto de Daiana da Silva Teixeira">
+          </a>
+          <div class="integrante-nome">Daiana da Silva Teixeira</div>
+          <div class="integrante-afiliacao">Universidade de São Paulo</div>
+          <div class="integrante-links">
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearchGate">
+              <img src="imgs/researchgate.png" alt="ResearchGate">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="Lattes">
+              <img src="imgs/lattes.png" alt="Lattes">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearcherID">
+              <img src="imgs/researcherid.png" alt="ResearcherID">
+            </a>
+          </div>
+        </div>
+        <div class="integrante-card integrante-card--padrao">
+          <a href="#" target="_blank" title="Página pessoal de Bruna B. C. Fernandes">
+            <img class="integrante-foto" src="imgs/pessoas/bruna.jpg" alt="Foto de Bruna B. C. Fernandes">
+          </a>
+          <div class="integrante-nome">Bruna B. C. Fernandes</div>
+          <div class="integrante-afiliacao">Universidade de São Paulo</div>
+          <div class="integrante-links">
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearchGate">
+              <img src="imgs/researchgate.png" alt="ResearchGate">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="Lattes">
+              <img src="imgs/lattes.png" alt="Lattes">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearcherID">
+              <img src="imgs/researcherid.png" alt="ResearcherID">
+            </a>
+          </div>
+        </div>
+        <div class="integrante-card integrante-card--padrao">
+          <a href="#" target="_blank" title="Página pessoal de Lucas Pivetta Maciel">
+            <img class="integrante-foto" src="imgs/pessoas/lucas.jpg" alt="Foto de Lucas Pivetta Maciel">
+          </a>
+          <div class="integrante-nome">Lucas Pivetta Maciel</div>
+          <div class="integrante-afiliacao">Universidade de São Paulo</div>
+          <div class="integrante-links">
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearchGate">
+              <img src="imgs/researchgate.png" alt="ResearchGate">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="Lattes">
+              <img src="imgs/lattes.png" alt="Lattes">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearcherID">
+              <img src="imgs/researcherid.png" alt="ResearcherID">
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Iniciação Científica -->
+    <section class="integrantes-section">
+      <div class="integrantes-title">Iniciação Científica</div>
+      <div class="integrantes-grid">
+        <div class="integrante-card integrante-card--padrao">
+          <a href="#" target="_blank" title="Página pessoal de Mônica de Oliveira Silva">
+            <img class="integrante-foto" src="imgs/pessoas/monica.jpg" alt="Foto de Mônica de Oliveira Silva">
+          </a>
+          <div class="integrante-nome">Mônica de Oliveira Silva</div>
+          <div class="integrante-afiliacao">Universidade de São Paulo</div>
+          <div class="integrante-links">
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearchGate">
+              <img src="imgs/researchgate.png" alt="ResearchGate">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="Lattes">
+              <img src="imgs/lattes.png" alt="Lattes">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearcherID">
+              <img src="imgs/researcherid.png" alt="ResearcherID">
+            </a>
+          </div>
+        </div>
+        <div class="integrante-card integrante-card--padrao">
+          <a href="#" target="_blank" title="Página pessoal de Mariana Cardoso Candido">
+            <img class="integrante-foto" src="imgs/pessoas/mariana.jpg" alt="Foto de Mariana Cardoso Candido">
+          </a>
+          <div class="integrante-nome">Mariana C. Candido</div>
+          <div class="integrante-afiliacao">Universidade de São Paulo</div>
+          <div class="integrante-links">
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearchGate">
+              <img src="imgs/researchgate.png" alt="ResearchGate">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="Lattes">
+              <img src="imgs/lattes.png" alt="Lattes">
+            </a>
+            <a class="integrante-link-btn" href="#" target="_blank" title="ResearcherID">
+              <img src="imgs/researcherid.png" alt="ResearcherID">
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logos">
+      <img src="imgs/usp.png" alt="USP">
+      <img src="imgs/fflch.png" alt="FFLCH">
+      <img src="imgs/flp.png" alt="Filologia">
+    </div>
+    <div class="footer-info">
+      Projeto DIA – USP | Filologia e Língua Portuguesa – DLCV | FFLCH | © 2025<br>
+    </div>
+  </footer>
+</body>
+</html>

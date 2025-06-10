@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Disciplinas | Projeto DIA</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --azul: #2e3192;
+      --ciano: #1bffff;
+      --cinza: #f5f7fa;
+      --cinza2: #e0e0e0;
+      --preto: #232526;
+      --branco: #fff;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f5fcff 60%, #eaf6ff 90%, #f5f7fa 100%);
+      color: var(--preto);
+      font-family: 'Montserrat', Arial, sans-serif;
+      min-height: 100vh;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(90deg, var(--azul) 60%, var(--ciano) 100%);
+      color: var(--branco);
+      box-shadow: 0 4px 24px #0002;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 0;
+    }
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2.5rem 3.5rem 1.5rem 3.5rem;
+    }
+    .logo-dia {
+      font-weight: 900;
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      color: var(--branco);
+      text-shadow: 0 2px 12px #0003;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo-dia::before {
+      content: "";
+      display: inline-block;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--ciano), var(--azul));
+      margin-right: 0.5rem;
+    }
+    nav {
+      display: flex;
+      gap: 2.2rem;
+    }
+    nav a {
+      color: var(--branco);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.15rem;
+      padding: 0.6rem 1.5rem;
+      border-radius: 8px;
+      transition: background 0.25s, color 0.25s;
+      letter-spacing: 0.5px;
+    }
+    nav a.active, nav a:hover {
+      background: var(--branco);
+      color: var(--azul);
+    }
+    main {
+      max-width: 1100px;
+      margin: 2.5rem auto 2rem auto;
+      padding: 0 1rem;
+      width: 100%;
+      flex: 1;
+    }
+    .disciplinas-section {
+      margin-bottom: 2.5rem;
+    }
+    .disciplinas-title {
+      color: var(--azul);
+      font-size: 1.7rem;
+      font-weight: 800;
+      margin-bottom: 1.2rem;
+      margin-top: 0;
+      letter-spacing: 0.5px;
+      padding-top: 0.4em;
+      padding-bottom: 0.3em;
+      text-align: left;
+    }
+    .disciplinas-ano {
+      color: var(--azul);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-top: 1.5em;
+      margin-bottom: 0.7em;
+    }
+    .disciplinas-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.3rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .disciplina-card {
+      background: var(--cinza);
+      border-radius: 12px;
+      box-shadow: 0 2px 12px #0001;
+      padding: 1.1rem 1.3rem 1rem 1.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      border-left: 6px solid var(--azul);
+      position: relative;
+    }
+    .disciplina-nome {
+      font-size: 1.13rem;
+      font-weight: 700;
+      color: var(--preto);
+      margin-bottom: 0.1rem;
+    }
+    .disciplina-info {
+      font-size: 1.01rem;
+      color: #444;
+      margin-bottom: 0.1rem;
+    }
+    .disciplina-docente {
+      font-size: 0.97rem;
+      color: var(--azul);
+      font-weight: 600;
+      margin-top: 0.1rem;
+    }
+    .disciplina-local {
+      font-size: 0.97rem;
+      color: #555;
+      margin-bottom: 0.1rem;
+    }
+    .disciplina-data {
+      font-size: 0.97rem;
+      color: #555;
+      margin-bottom: 0.1rem;
+    }
+    .disciplina-link {
+      font-size: 0.97rem;
+      color: var(--azul);
+      text-decoration: underline;
+      font-weight: 600;
+      margin-top: 0.2rem;
+      align-self: flex-start;
+      transition: color 0.2s;
+    }
+    .disciplina-link:hover {
+      color: var(--azul);
+    }
+    /* Layout em colunas para graduação e pós */
+    .disciplinas-colunas {
+      display: flex;
+      gap: 2.5rem;
+      align-items: flex-start;
+      justify-content: stretch;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .disciplinas-section {
+      flex: 1 1 0;
+      min-width: 320px;
+      margin-bottom: 0;
+    }
+    @media (max-width: 900px) {
+      .header-container, main {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      .disciplinas-colunas {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .disciplinas-section {
+        margin-bottom: 1.5rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .header-container, main {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      .logo-dia {
+        font-size: 1.3rem;
+      }
+      .disciplinas-title {
+        font-size: 1.25rem;
+      }
+      .disciplina-nome {
+        font-size: 1.05rem;
+      }
+    }
+    footer {
+      background: linear-gradient(90deg, var(--azul) 60%, var(--ciano) 100%);
+      color: var(--branco);
+      text-align: center;
+      padding: 3rem 1.5rem 2.5rem 1.5rem;
+      margin-top: auto;
+      border-top: none;
+      font-size: 1.08rem;
+      box-shadow: 0 -4px 24px #0002;
+    }
+    .footer-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .footer-logos img {
+      height: 44px;
+      background: none;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+      display: block;
+      filter: brightness(0) invert(1);
+    }
+    .footer-logos img[alt="Filologia"] {
+      height: 60px;
+    }
+    .footer-info {
+      font-size: 1.08rem;
+      margin-top: 1rem;
+      color: var(--cinza);
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo-dia">Projeto DIA</div>
+      <nav>
+        <a href="#">Home</a>
+        <a href="lucas.html">Integrantes</a>
+        <a href="disciplinas.html" class="active">Disciplinas</a>
+        <a href="eventos.html">Eventos</a>
+        <a href="#">Defesas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="disciplinas-colunas">
+      <!-- Disciplinas de Graduação -->
+      <section class="disciplinas-section">
+        <div class="disciplinas-title">Graduação</div>
+        <div class="disciplinas-ano">2024</div>
+        <ul class="disciplinas-list">
+          <li class="disciplina-card">
+            <div class="disciplina-nome">Teorias do Texto - Enunciação, Discurso e Texto <span style="color:#888;font-size:0.95em;">(2024.1)</span></div>
+            <div class="disciplina-docente">Ministrada por: Paulo Roberto Gonçalves-Segundo (USP)</div>
+            <div class="disciplina-local">Local: FFLCH/USP</div>
+            <a class="disciplina-link" href="https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=FLC0285" target="_blank">Ementa</a>
+          </li>
+          <li class="disciplina-card">
+            <div class="disciplina-nome">Introdução ao Estudo da Língua Portuguesa II <span style="color:#888;font-size:0.95em;">(2024.2)</span></div>
+            <div class="disciplina-docente">Ministrada por: Paulo Roberto Gonçalves-Segundo (USP)</div>
+            <div class="disciplina-local">Local: FFLCH/USP</div>
+            <a class="disciplina-link" href="https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=FLC0115" target="_blank">Ementa</a>
+          </li>
+        </ul>
+        <div class="disciplinas-ano">2023</div>
+        <ul class="disciplinas-list">
+          <li class="disciplina-card">
+            <div class="disciplina-nome">Teorias do Texto - Enunciação, Discurso e Texto <span style="color:#888;font-size:0.95em;">(2023.1)</span></div>
+            <div class="disciplina-docente">Ministrada por: Paulo Roberto Gonçalves-Segundo (USP)</div>
+            <div class="disciplina-local">Local: FFLCH/USP</div>
+            <a class="disciplina-link" href="https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=FLC0285" target="_blank">Ementa</a>
+          </li>
+          <li class="disciplina-card">
+            <div class="disciplina-nome">Introdução ao Estudo da Língua Portuguesa II <span style="color:#888;font-size:0.95em;">(2023.2)</span></div>
+            <div class="disciplina-docente">Ministrada por: Paulo Roberto Gonçalves-Segundo (USP)</div>
+            <div class="disciplina-local">Local: FFLCH/USP</div>
+            <a class="disciplina-link" href="https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=FLC0115" target="_blank">Ementa</a>
+          </li>
+        </ul>
+        <div class="disciplinas-ano">2022</div>
+        <ul class="disciplinas-list">
+          <li class="disciplina-card">
+            <div class="disciplina-nome">Sintaxe do Português I <span style="color:#888;font-size:0.95em;">(2022.1)</span></div>
+            <div class="disciplina-docente">Ministrada por: Paulo Roberto Gonçalves-Segundo (USP)</div>
+            <div class="disciplina-local">Local: FFLCH/USP</div>
+            <a class="disciplina-link" href="https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=FLC0277" target="_blank">Ementa</a>
+          </li>
+        </ul>
+        <div class="disciplinas-ano">2021</div>
+        <ul class="disciplinas-list">
+          <li class="disciplina-card">
+            <div class="disciplina-nome">Gramática e Ensino <span style="color:#888;font-size:0.95em;">(2021.2)</span></div>
+            <div class="disciplina-docente">Ministrada por: Paulo Roberto Gonçalves-Segundo (USP)</div>
+            <div class="disciplina-local">Local: FFLCH/USP</div>
+            <a class="disciplina-link" href="https://portalservicos.usp.br/jupiterweb/obterDisciplina?sgldis=FLC1465" target="_blank">Ementa</a>
+          </li>
+        </ul>
+        <div class="disciplinas-ano">2020</div>
+        <ul class="disciplinas-list">
+          <li class="disciplina-card">
+            <div class="disciplina-nome">Sintaxe do Português I <span style="color:#888;font-size:0.95em;">(2020.1)</span></div>
+            <div class="disciplina-docente">Ministrada por: Paulo Roberto Gonçalves-Segundo (USP)</div>
+            <div class="disciplina-local">Local: FFLCH/USP</div>
+            <a class="disciplina-link" href="https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=FLC0277" target="_blank">Ementa</a>
+          </li>
+          <li class="disciplina-card">
+            <div class="disciplina-nome">Introdução ao Estudo da Língua Portuguesa II <span style="color:#888;font-size:0.95em;">(2020.2)</span></div>
+            <div class="disciplina-docente">Ministrada por: Paulo Roberto Gonçalves-Segundo (USP)</div>
+            <div class="disciplina-local">Local: FFLCH/USP</div>
+            <a class="disciplina-link" href="https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=FLC0115" target="_blank">Ementa</a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Disciplinas de Pós-Graduação -->
+      <section class="disciplinas-section">
+        <div class="disciplinas-title">Pós-Graduação</div>
+        <div class="disciplinas-ano">2025</div>
+        <ul class="disciplinas-list">
+          <li class="disciplina-card">
+            <div class="disciplina-nome">Tópicos em Teoria e Análise Retórico-Argumentativa: A Abordagem Lógico-Discursiva da Argumentação <span style="color:#888;font-size:0.95em;">(2025.1)</span></div>
+            <div class="disciplina-docente">Ministrada por: Rodrigo Seixas (UFG)</div>
+            <div class="disciplina-data">Data: 10, 11, 12 e 13 de março de 2025</div>
+            <div class="disciplina-local">Local: FFLCH/USP</div>
+            <a class="disciplina-link" href="https://uspdigital.usp.br/janus/cursosOferecidos/curriculoDisciplinasInicial.jsf?sgldis=FLP5925" target="_blank">Ementa</a>
+          </li>
+          <li class="disciplina-card">
+            <div class="disciplina-nome">Introdução aos Estudos do Texto e do Discurso <span style="color:#888;font-size:0.95em;">(2025.1)</span></div>
+            <div class="disciplina-docente">Ministrada por: Luiz Antonio da Silva, Manoel Luiz Goncalves Correa, Maria Lúcia C. V. O. Andrade, Paulo Roberto Gonçalves Segundo e Sheila Vieira de Camargo Grillo (USP)</div>
+            <div class="disciplina-data">Data: 18 de março a 10 de junho de 2025</div>
+            <div class="disciplina-local">Local: FFLCH/USP</div>
+            <a class="disciplina-link" href="https://uspdigital.usp.br/janus/cursosOferecidos/curriculoDisciplinasInicial.jsf?sgldis=FLP5910" target="_blank">Ementa</a>
+          </li>
+        </ul>
+        <div class="disciplinas-ano">2024</div>
+        <ul class="disciplinas-list">
+          <li class="disciplina-card">
+            <div class="disciplina-nome">Argumentação em Perspectiva Dialogal <span style="color:#888;font-size:0.95em;">(2024.1)</span></div>
+            <div class="disciplina-docente">Ministrada por: Rubens Damasceno-Morais (UFG)</div>
+            <div class="disciplina-data">Data: 6, 7 e 8 de maio de 2024</div>
+            <div class="disciplina-local">Local: FFLCH/USP</div>
+            <a class="disciplina-link" href="https://uspdigital.usp.br/janus/cursosOferecidos/curriculoDisciplinasInicial.jsf?sgldis=FLP5926" target="_blank">Ementa</a>
+          </li>
+          <li class="disciplina-card">
+            <div class="disciplina-nome">Linguística Aplicada a diferentes contextos <span style="color:#888;font-size:0.95em;">(2024.1)</span></div>
+            <div class="disciplina-docente">Ministrada por: Manoel Luiz Goncalves Correa, Maria Ines Batista Campos Noel Ribeiro, Paulo Roberto Gonçalves Segundo, Zilda Gaspar Oliveira de Aquino e Waldemar Ferreira Netto (USP)</div>
+            <div class="disciplina-data">Data: 6 de março a 6 de junho de 2024</div>
+            <div class="disciplina-local">Local: FFLCH/USP</div>
+            <a class="disciplina-link" href="https://uspdigital.usp.br/janus/cursosOferecidos/curriculoDisciplinasInicial.jsf?sgldis=FLP5913" target="_blank">Ementa</a>
+          </li>
+          <li class="disciplina-card">
+            <div class="disciplina-nome">A Ideologia à Luz da Perspectiva Enunciativa de Anscombre e Ducrot <span style="color:#888;font-size:0.95em;">(2024.2)</span></div>
+            <div class="disciplina-docente">Ministrada por: Alvaro Magalhães Pereira da Silva (UFPB)</div>
+            <div class="disciplina-data">Data: 21, 22 e 23 de outubro de 2024</div>
+            <div class="disciplina-local">Local: FFLCH/USP</div>
+            <a class="disciplina-link" href="https://uspdigital.usp.br/janus/cursosOferecidos/curriculoDisciplinasInicial.jsf?sgldis=FLP5927" target="_blank">Ementa</a>
+          </li>
+        </ul>
+        <div class="disciplinas-ano">2023</div>
+        <ul class="disciplinas-list">
+          <li class="disciplina-card">
+            <div class="disciplina-nome">Rethoric, Argumentation, and Conflict <span style="color:#888;font-size:0.95em;">(2023.1)</span></div>
+            <div class="disciplina-docente">Ministrada por: Christopher W. Tindale (University of Windsor, Canadá)</div>
+            <div class="disciplina-data">Data: 13, 14 e 17 de abril de 2023</div>
+            <div class="disciplina-local">Local: FFLCH/USP</div>
+            <a class="disciplina-link" href="https://uspdigital.usp.br/janus/cursosOferecidos/curriculoDisciplinasInicial.jsf?sgldis=FLP5922" target="_blank">Ementa</a>
+          </li>
+          <li class="disciplina-card">
+            <div class="disciplina-nome">Argumentação prática – teoria e análise <span style="color:#888;font-size:0.95em;">(2023.2)</span></div>
+            <div class="disciplina-docente">Ministrada por: Paulo Roberto Gonçalves-Segundo (USP)</div>
+            <div class="disciplina-data">Data: 25, 26, 27 e 28 de setembro de 2023</div>
+            <div class="disciplina-local">Local: Universidade Estadual de Santa Cruz</div>
+            <a class="disciplina-link" href="https://uspdigital.usp.br/janus/cursosOferecidos/curriculoDisciplinasInicial.jsf?sgldis=FLP5923" target="_blank">Ementa</a>
+          </li>
+          <li class="disciplina-card">
+            <div class="disciplina-nome">Introdução aos Estudos do Texto e do Discurso <span style="color:#888;font-size:0.95em;">(2023.2)</span></div>
+            <div class="disciplina-docente">Ministrada por: Manoel Luiz Goncalves Correa, Paulo Roberto Gonçalves Segundo, Sheila Vieira de Camargo Grillo e Zilda Gaspar Oliveira de Aquino (USP)</div>
+            <div class="disciplina-data">Data: 09 de agosto a 22 de novembro de 2023</div>
+            <div class="disciplina-local">Local: FFLCH/USP</div>
+            <a class="disciplina-link" href="https://uspdigital.usp.br/janus/cursosOferecidos/curriculoDisciplinasInicial.jsf?sgldis=FLP5910" target="_blank">Ementa</a>
+          </li>
+        </ul>
+        <div class="disciplinas-ano">2022</div>
+        <ul class="disciplinas-list">
+          <li class="disciplina-card">
+            <div class="disciplina-nome">Tópicos avançados em Estudos da Argumentação <span style="color:#888;font-size:0.95em;">(2022.1)</span></div>
+            <div class="disciplina-docente">Ministrada por: Paulo Roberto Gonçalves-Segundo (USP)</div>
+            <div class="disciplina-data">Data: 15 de março a 5 de julho de 2022</div>
+            <div class="disciplina-local">Local: FFLCH/USP</div>
+            <a class="disciplina-link" href="https://uspdigital.usp.br/janus/cursosOferecidos/curriculoDisciplinasInicial.jsf?sgldis=FLP5912" target="_blank">Ementa</a>
+          </li>
+        </ul>
+        <div class="disciplinas-ano">2021</div>
+        <ul class="disciplinas-list">
+          <li class="disciplina-card">
+            <div class="disciplina-nome">Tópicos Especiais: Fundamentos de análise argumentativa: Toulmin, Walton e Perelman <span style="color:#888;font-size:0.95em;">(2021.2)</span></div>
+            <div class="disciplina-docente">Ministrada por: Eduardo Lopes Piris (UESC) e Paulo Roberto Gonçalves-Segundo (USP)</div>
+            <div class="disciplina-data">Data: 9 de setembro a 25 de novembro de 2021</div>
+            <div class="disciplina-local">Local: Universidade Estadual de Santa Cruz</div>
+            <a class="disciplina-link" href="https://uspdigital.usp.br/janus/cursosOferecidos/curriculoDisciplinasInicial.jsf?sgldis=FLP5911" target="_blank">Ementa</a>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-logos">
+      <img src="imgs/usp.png" alt="USP">
+      <img src="imgs/fflch.png" alt="FFLCH">
+      <img src="imgs/flp.png" alt="Filologia">
+    </div>
+    <div class="footer-info">
+      Projeto DIA – USP | Filologia e Língua Portuguesa – DLCV | FFLCH | © 2025<br>
+    </div>
+  </footer>
+</body>
+</html>
