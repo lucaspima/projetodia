@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Prof. Dr. Paulo Roberto Gonçalves Segundo | USP</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --azul: #2e3192;
+      --ciano: #1bffff;
+      --cinza: #f5f7fa;
+      --cinza2: #e0e0e0;
+      --rosa: #ff6e7f;
+      --preto: #232526;
+      --branco: #fff;
+      --header-pesquisador: #f5f7fa;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--branco);
+      color: var(--preto);
+      font-family: 'Montserrat', Arial, sans-serif;
+      min-height: 100vh;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    /* Header geral aumentado */
+    header {
+      background: linear-gradient(90deg, var(--azul) 60%, var(--ciano) 100%);
+      color: var(--branco);
+      box-shadow: 0 4px 24px #0002;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 0;
+    }
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2.5rem 3.5rem 1.5rem 3.5rem;
+    }
+    .logo-dia {
+      font-weight: 900;
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      color: var(--branco);
+      text-shadow: 0 2px 12px #0003;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo-dia::before {
+      content: "";
+      display: inline-block;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--ciano), var(--azul));
+      margin-right: 0.5rem;
+    }
+    nav {
+      display: flex;
+      gap: 2.2rem;
+    }
+    nav a {
+      color: var(--branco);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.15rem;
+      padding: 0.6rem 1.5rem;
+      border-radius: 8px;
+      transition: background 0.25s, color 0.25s;
+      letter-spacing: 0.5px;
+    }
+    nav a.active, nav a:hover {
+      background: var(--branco);
+      color: var(--azul);
+    }
+    /* Novo header do integrante ocupando toda a largura */
+    .profile-header-full {
+      width: 100vw;
+      min-width: 100vw;
+      background: var(--header-pesquisador);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+    }
+    .profile-header-content {
+      width: 100%;
+      max-width: 1400px;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      padding: 3rem 4vw 3rem 4vw;
+      box-sizing: border-box;
+    }
+    .profile-photo {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 6px solid var(--azul);
+      box-shadow: 0 4px 24px #0003;
+      background: var(--cinza2);
+      background-size: cover;
+      background-position: center;
+      margin-right: 2rem;
+      flex-shrink: 0;
+    }
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      align-items: flex-start;
+    }
+    .profile-info h1 {
+      margin: 0 0 0.2rem 0;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--azul);
+      text-shadow: none;
+    }
+    .profile-info .usp,
+    .profile-info .status,
+    .profile-info .lab {
+      font-size: 1.15rem;
+      color: var(--preto);
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+    .profile-info .status {
+      color: var(--ciano);
+      font-weight: 600;
+    }
+    .profile-info .lab {
+      color: var(--rosa);
+      font-weight: 700;
+    }
+    .social-buttons {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .social-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      box-shadow: 0 2px 8px #0001;
+      transition: transform 0.25s, box-shadow 0.25s, background 0.25s, color 0.25s;
+      color: var(--azul);
+      font-size: 1.1rem;
+      text-decoration: none;
+    }
+    .social-btn:hover {
+      transform: scale(1.07);
+      box-shadow: 0 4px 16px #0001;
+      background: var(--ciano);
+      color: var(--azul);
+    }
+    .social-btn img {
+      width: 22px;
+      height: 22px;
+      filter: grayscale(1) brightness(0.3) opacity(0.7);
+      transition: filter 0.2s;
+    }
+    .social-btn:hover img {
+      filter: none;
+    }
+    /* Layout principal com barra lateral */
+    .main-layout {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      max-width: 1400px;
+      margin: 2.5rem auto 0 auto;
+      width: 100%;
+      gap: 3rem;
+      padding: 0 4vw;
+    }
+    .main-content {
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      align-items: center;
+      min-width: 0;
+      margin-bottom: 4rem; /* aumenta espaço antes do footer */
+    }
+    .info-section {
+      width: 100%;
+      max-width: 700px;
+      background: var(--branco);
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #0001;
+      padding: 2rem 2.5rem 1.5rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 230px;
+      justify-content: center;
+      transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+    }
+    .info-section p, .info-section ul, .info-section li {
+      text-align: justify;
+    }
+    .info-section:hover {
+      box-shadow: 0 8px 32px #0001;
+      transform: translateY(-3px) scale(1.012);
+      border-color: var(--ciano);
+    }
+    .info-section h2 {
+      margin-top: 0;
+      color: var(--azul);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      text-align: center;
+    }
+    .info-section ul {
+      margin: 0;
+      padding-left: 1.5rem;
+      width: 100%;
+    }
+    .info-section li {
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    /* Barra de publicações lateral */
+    .publicacoes-bar {
+      width: 360px;
+      min-width: 220px;
+      max-width: 400px;
+      background: transparent;
+      border-radius: 18px;
+      box-shadow: none;
+      padding: 2rem 1.2rem 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      min-height: 0;
+      justify-content: flex-start;
+      position: sticky;
+      top: 120px;
+      transition: none;
+      margin-bottom: 2.5rem;
+      box-sizing: border-box;
+      overflow: visible;
+    }
+    .publicacoes-bar:hover {
+      box-shadow: none;
+      transform: none;
+    }
+    .publicacoes-tabs-switch {
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
+      width: 100%;
+      justify-content: flex-start;
+      align-items: center;
+      box-sizing: border-box;
+      padding-bottom: 0;
+    }
+    .publicacoes-switch-btn {
+      background: var(--cinza);
+      border: none;
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: var(--azul);
+      padding: 0.7rem 1.1rem;
+      cursor: pointer;
+      border-radius: 8px 8px 0 0;
+      transition: background 0.25s, color 0.25s;
+    }
+    .publicacoes-switch-btn.active,
+    .publicacoes-switch-btn:focus {
+      background: var(--branco);
+      color: var(--azul);
+      border-bottom: 3px solid var(--ciano);
+      z-index: 2;
+      position: relative;
+    }
+    .publicacoes-tabs {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+      align-items: stretch;
+      box-sizing: border-box;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .publicacoes-tab-btn {
+      width: 100%;
+      text-align: left;
+      border-radius: 8px;
+      margin-bottom: 0;
+      background: var(--cinza);
+      padding: 0.7rem 1.1rem;
+      cursor: pointer;
+      border: none;
+      border-bottom: 2px solid transparent;
+      transition: border 0.25s, color 0.25s, background 0.25s;
+      max-width: 100%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      font-size: 1.02rem;
+    }
+    .publicacoes-tab-btn.active,
+    .publicacoes-tab-btn:focus {
+      background: var(--branco);
+      color: var(--azul);
+      border-bottom: 2px solid var(--ciano);
+      z-index: 2;
+      position: relative;
+    }
+    .publicacoes-list {
+      display: none;
+    }
+    .publicacoes-list.active {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      width: 100%;
+      padding-bottom: 0.7rem;
+      justify-content: flex-start;
+      margin-top: 0.5rem;
+      min-height: 0;
+    }
+    .publicacao-card {
+      background: var(--cinza);
+      border-radius: 12px;
+      box-shadow: 0 1px 6px #0001;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0.7rem 0.7rem 0.7rem 0.7rem;
+      transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+      border: 2px solid var(--cinza2);
+      position: relative;
+      min-height: 80px;
+      gap: 0.8rem;
+    }
+    .publicacao-card:hover {
+      box-shadow: 0 8px 32px #0001;
+      transform: translateY(-2px) scale(1.01);
+      border-color: var(--ciano);
+      background: var(--branco);
+    }
+    .publicacao-capa {
+      width: 56px;
+      height: 76px;
+      background: var(--cinza2);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cinza2);
+      font-size: 0.95rem;
+      font-style: italic;
+      letter-spacing: 1px;
+      border: 1.5px dashed var(--cinza2);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .publicacao-info {
+      text-align: left;
+      font-size: 0.97rem;
+      color: var(--preto);
+      margin-bottom: 0.2rem;
+      flex: 1;
+      line-height: 1.3;
+    }
+    .publicacao-link {
+      color: var(--azul);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.97rem;
+      margin-left: 0.5rem;
+      transition: color 0.2s;
+      align-self: flex-end;
+    }
+    .publicacao-link:hover {
+      color: var(--ciano);
+      text-decoration: underline;
+    }
+    /* Footer aumentado */
+    footer {
+      background: linear-gradient(90deg, var(--azul) 60%, var(--ciano) 100%);
+      color: var(--branco);
+      text-align: center;
+      padding: 3rem 1.5rem 2.5rem 1.5rem;
+      margin-top: auto;
+      border-top: none;
+      font-size: 1.08rem;
+      box-shadow: 0 -4px 24px #0002;
+    }
+    .footer-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .footer-logos img {
+      height: 44px;
+      background: none;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+      display: block;
+      filter: brightness(0) invert(1);
+      /* Deixa o logo branco, funciona para PNG/SVG escuros */
+    }
+    .footer-logos img[alt="Filologia"] {
+      height: 60px;
+    }
+    .footer-info {
+      font-size: 1.08rem;
+      margin-top: 1rem;
+      color: var(--cinza);
+      font-weight: 500;
+    }
+    @media (max-width: 1100px) {
+      .main-layout {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0 1rem;
+        gap: 2rem;
+      }
+      .publicacoes-bar {
+        width: 100%;
+        max-width: 700px;
+        min-width: 0;
+        margin: 2rem auto 0 auto;
+        position: static;
+        padding: 2rem 1.5rem 1.5rem 1.5rem;
+      }
+    }
+    @media (max-width: 900px) {
+      .header-container, .profile-header-content, .main-layout {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      .profile-header-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 2rem 1rem;
+      }
+      .profile-photo {
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+      .main-layout {
+        gap: 1.5rem;
+      }
+      .publicacoes-list {
+        gap: 1rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .header-container, .profile-header-content, .main-layout {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      .profile_photo,
+      .profile-photo {
+        width: 120px;
+        height: 120px;
+      }
+      .footer-logos img {
+        height: 28px;
+      }
+      .info-section, .publicacoes-bar {
+        padding: 1rem 0.5rem 1rem 0.5rem;
+      }
+      .publicacao-capa {
+        width: 40px;
+        height: 54px;
+        font-size: 0.8rem;
+      }
+      .publicacao-card {
+        padding: 0.5rem;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo-dia">Projeto DIA</div>
+      <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="integrantes.html">Integrantes</a>
+        <a href="disciplinas.html">Disciplinas</a>
+        <a href="eventos.html">Eventos</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Header do integrante (full width) -->
+  <div class="profile-header-full">
+    <div class="profile-header-content">
+      <img class="profile-photo" src="imgs/lucas.jpg" alt="Foto do Integrante">
+      <div class="profile-info">
+        <h1>Prof. Dr. Paulo Roberto Gonçalves Segundo</h1>
+        <div class="usp">Universidade de São Paulo (USP)</div>
+        <div class="status" style="color:#444;">Líder | Projeto DIA</div>
+        <div class="lab">Programa Filologia e Língua Portuguesa - DLCV/USP</div>
+        <div class="social-buttons">
+          <a class="social-btn" href="https://www.researchgate.net/" target="_blank" title="ResearchGate">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/researchgate.svg" alt="ResearchGate">
+          </a>
+          <a class="social-btn" href="https://www.linkedin.com/" target="_blank" title="LinkedIn">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn">
+          </a>
+          <a class="social-btn" href="https://scholar.google.com/" target="_blank" title="Google Scholar">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/googlescholar.svg" alt="Google Scholar">
+          </a>
+          <a class="social-btn" href="http://lattes.cnpq.br/" target="_blank" title="Lattes">
+            <img src="imgs/lattes.png" alt="Lattes">
+          </a>
+          <a class="social-btn" href="https://orcid.org/" target="_blank" title="ORCID">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/orcid.svg" alt="ORCID">
+          </a>
+          <a class="social-btn" href="https://www.webofscience.com/wos/author/record/" target="_blank" title="ResearcherID">
+            <img src="imgs/researcherid.png" alt="ResearcherID">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Layout principal com barra lateral de publicações -->
+  <div class="main-layout">
+    <div class="main-content">
+      <!-- NOVA SEÇÃO: Apresentação -->
+      <div class="info-section">
+        <h2>Apresentação</h2>
+        <p>
+          Paulo Roberto Gonçalves-Segundo graduou-se em Letras (Português) pela Universidade de São Paulo (USP), Brasil, onde também completou seu doutorado, defendendo tese intitulada Tradição, dinamicidade e estabilidade nas práticas discursivas: um estudo da negociação intersubjetiva na imprensa paulistana (DOI: 10.11606/T.8.2011.tde-25042012-161141) em 2011. Desde 2013, atua como Professor Doutor, em regime de dedicação exclusiva, no Departamento de Letras Clássicas e Vernáculas da Universidade de São Paulo (USP). Em 2023, foi aprovado em concurso de livre-docência, sendo promovido a Professor Doutor Associado. Além de ministrar cursos na graduação e na pós-graduação, orientar pesquisas de mestrado e de doutorado e atuar na coordenação de subprojetos de língua portuguesa ora no PIBID, ora no PRP, Paulo Roberto Gonçalves-Segundo lidera o grupo de pesquisa NEAC- Núcleo de Estudos em Análise Crítica do Discurso, é integrante dos grupos ELAD - Estudos de Linguagem, Argumentação e Discurso, SAL - Sistêmica, Ambientes e Linguagens e do GT ANPOLL de Argumentação, é coeditor da Revista Eletrônica de Estudos Integrados em Discurso e Argumentação e editor-chefe da Revista Linha DÁgua. Atualmente, tem trabalhado em dois projetos de pesquisa: Gramática, cognição e discurso e Projeto DIA - Discurso, Interação e Argumentação em Mídias Digitais. Paulo Roberto Gonçalves Segundo é autor de diversos artigos e capítulos de livro e organizador de livros nas áreas dos Estudos Discursivos, da Linguística Cognitiva, Linguística Sistêmico-Funcional, Semiótica Social e Teoria da Argumentação. De setembro de 2017 a agosto de 2019, foi coordenador do Programa de Pós-Graduação em Filologia e Língua Portuguesa da Universidade de São Paulo (USP). Entre setembro de 2022 e fevereiro de 2023, atuou como professor visitante na Universidade do Porto, Portugal, com financiamento pelo programa CAPES-PrInt. Atualmente, coordena a Licenciatura em Letras da Universidade de São Paulo (ago. 2023-atual)
+        </p>
+      </div>
+      <!-- NOVA SEÇÃO: Projeto de pesquisa atual -->
+      <div class="info-section">
+        <h2>Projeto de pesquisa atual</h2>
+        <b>Projeto DIA - Discurso, Interação e Argumentação em Mídias Digitais</b>
+        <p style="margin-top:0.7rem;">
+          Este projeto congrega pesquisas dedicadas ao estudo de práticas discursivas em mídias digitais. Partindo de uma perspectiva multidisciplinar, que congrega a linguística sistêmico-funcional, a teoria da argumentação e os estudos críticos do discurso, busca-se compreender: (i) o papel da multimodalidade na constituição do discurso digital, tanto em redes sociais quanto em videogames; (ii) o processo de produção, distribuição, consumo e interpretação de textos digitais em função das coerções sociossemióticas, contextuais e computacionais; (iii) a formação e a constituição de controvérsias em ambiente digital, com ênfase na depreensão de argumentários;(iv) o funcionamento de polílogos argumentativos em plataformas digitais, com destaque ao Facebook, ao Twitter, ao Instagram, ao Reddit, ao YouTube e ao 4chan.
+        </p>
+      </div>
+      <div class="info-section">
+        <h2>Projetos de Pesquisa</h2>
+        <ul>
+          <li>
+            <b>Argumentação em perspectiva multidisciplinar e multidimensional</b><br>
+            <i></i>
+          </li>
+          <li>
+            <b>Gramática, Cognição e Discurso</b><br>
+            <i></i>
+          </li>
+          <li>
+            <b>Padrões de Negociação Intersubjetiva em Gêneros Orais e Escritos no Português Brasileiro: uma análise crítico-discursiva e sistêmico-funcional</b><br>
+            <i></i>
+          </li>
+        </ul>
+      </div>
+      <div class="info-section">
+        <h2>Apresentações em Eventos</h2>
+        <ul>
+          <li>
+            <b>Título</b><br>
+            Evento
+          </li>
+          <li>
+            <b>Título</b><br>
+            Evento
+          </li>
+          <li>
+            <b>Título</b><br>
+            Evento
+          </li>
+          <li>
+            <b>Título</b><br>
+            Evento
+          </li>
+          <li>
+            <b>Título</b><br>
+            Evento
+          </li>
+          <li>
+            <b>Título</b><br>
+           Evento
+          </li>
+          <li>
+            <b>Título</b><br>
+            Evento
+          </li>
+        </ul>
+      </div>
+      <div class="info-section">
+        <h2>Financiamentos Atuais e Passados</h2>
+        <ul>
+          <li>
+            <b>Bolsa X</b> (XX/XXX-XX/XXXX) <br>
+            USP, Brasil
+          </li>
+        </ul>
+      </div>
+    </div>
+    <aside class="publicacoes-bar">
+      <div class="publicacoes-tabs-switch">
+        <button class="publicacoes-switch-btn active" onclick="showPubTab('publicacoes', this)">Publicações</button>
+        <button class="publicacoes-switch-btn" onclick="showPubTab('midia', this)">Textos na Mídia</button>
+      </div>
+      <div id="publicacoes" class="publicacoes-list active">
+        <div class="publicacoes-tabs">
+          <!-- Removido botão "Artigo 1" -->
+        </div>
+        <div class="publicacao-card">
+          <div class="publicacao-capa">
+            <img src="imgs/x.png" alt="Capa da publicação" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">
+          </div>
+          <div class="publicacao-info">
+            <b>Argumentação prática: teoria, método e análise</b><br>
+            Pontes Editores
+          </div>
+          <a class="publicacao-link" href="#" target="_blank">Livro</a>
+        </div>
+      </div>
+      <div id="midia" class="publicacoes-list">
+        <div class="publicacoes-tabs">
+          <!-- Removido botão "Texto 1" -->
+        </div>
+        <div class="publicacao-card">
+          <div class="publicacao-capa">
+            <img src="imgs/x.jpg" alt="Capa da publicação" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">
+          </div>
+          <div class="publicacao-info">
+            <b>X</b><br>
+           X
+          </div>
+          <a class="publicacao-link" href="#" target="_blank">Link</a>
+        </div>
+        <div class="publicacao-card">
+          <div class="publicacao-capa">
+            <img src="imgs/x.png" alt="Capa da publicação" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">
+          </div>
+          <div class="publicacao-info">
+            <b>X</b><br>
+           X
+          </div>
+          <a class="publicacao-link" href="#" target="_blank">Link</a>
+        </div>
+        <div class="publicacao-card">
+          <div class="publicacao-capa">
+            <img src="imgs/x.jpg" alt="Capa da publicação" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">
+          </div>
+          <div class="publicacao-info">
+            <b>X</b> X<br>
+            X
+          </div>
+          <a class="publicacao-link" href="#" target="_blank">Link</a>
+        </div>
+        <div class="publicacao-card">
+          <div class="publicacao-capa">
+            <img src="imgs/X.png" alt="Capa da publicação" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">
+          </div>
+          <div class="publicacao-info">
+            <b>X</b><br>
+            X
+          </div>
+          <a class="publicacao-link" href="#" target="_blank">Link</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    <div class="footer-logos">
+      <img src="imgs/usp.png" alt="USP">
+      <img src="imgs/fflch.png" alt="FFLCH">
+      <img src="imgs/flp.png" alt="Filologia">
+    </div>
+    <div class="footer-info">
+      Projeto DIA – USP | Filologia e Língua Portuguesa – DLCV | FFLCH | © 2025<br>
+    </div>
+  </footer>
+
+  <script>
+  // Abas publicações
+  function showPubTab(tabId, btn) {
+    document.querySelectorAll('.publicacoes-switch-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    document.querySelectorAll('.publicacoes-list').forEach(tab => tab.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    showPubTab('publicacoes', document.querySelector('.publicacoes-switch-btn.active'));
+  });
+  </script>
+</body>
+</html>
